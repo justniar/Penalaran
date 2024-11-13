@@ -10,6 +10,8 @@ const TextAnalyzer: React.FC = () => {
   const [modifiedText, setModifiedText] = useState<string>(article);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5; 
+  const [modifiedWords, setModifiedWords] = useState<Map<number, string>>(new Map());
+
 
   const countOccurrences = (word: string): number => {
     const regex = new RegExp(`\\b${word}\\b`, 'gi');
@@ -18,7 +20,11 @@ const TextAnalyzer: React.FC = () => {
 
   const handleReplace = (): void => {
     const regex = new RegExp(`\\b${replaceWord}\\b`, 'gi');
-    const newText = modifiedText.replace(regex, newWord);
+    const newText = modifiedText.replace(regex, (match, offset) => {
+      const newWordWithHighlight = `<span class="bg-blue-300">${newWord}</span>`;
+      setModifiedWords(prev => prev.set(offset, newWordWithHighlight)); 
+      return newWordWithHighlight;
+    });
     setModifiedText(newText);
   };
 
@@ -104,7 +110,9 @@ const TextAnalyzer: React.FC = () => {
 
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Modified Text:</h3>
-          <p className="bg-white p-4 rounded-md shadow-md text-sm">{modifiedText}</p>
+          <p className="bg-white p-4 rounded-md shadow-md text-sm" dangerouslySetInnerHTML={{
+            __html: modifiedText,
+          }} />
         </div>
       </div>
 
