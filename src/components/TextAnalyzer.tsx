@@ -26,15 +26,16 @@ const TextAnalyzer: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-gray-100 text-gray-800">
+    <div className="max-w-full mx-auto p-6 bg-gray-100 text-gray-800">
       <h1 className="text-3xl font-bold mb-6 text-center">Text Analyzer</h1>
 
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold">Original Text</h2>
-        <p className="bg-white p-4 rounded-md shadow-md text-sm">{article}</p>
+      <div className="mb-6 max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Original Text</h2>
+        <p className="bg-gray-100 p-4 rounded-md text-sm text-gray-700 shadow-inner">{article}</p>
       </div>
 
-      <div className="mb-6">
+
+      <div className="mb-6 max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-xl font-semibold mb-2">Pencarian Kata</h2>
         <input
           type="text"
@@ -55,7 +56,7 @@ const TextAnalyzer: React.FC = () => {
           value={replaceWord}
           onChange={(e) => setReplaceWord(e.target.value)}
           placeholder="Kata yang ingin diganti"
-          className="border border-gray-300 rounded-md p-2 w-full mb-2"
+          className="max-w-6xl mx-auto border border-gray-300 rounded-md p-2 w-full mb-2"
         />
         <input
           type="text"
