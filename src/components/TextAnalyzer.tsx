@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
+import articleData from '../article.json';
 
-const article = `Dalam kehidupan suatu negara, pendidikan memegang peranan yang amat
-penting untuk menjamin kelangsungan hidup negara dan bangsa, karena pendidikan
-merupakan wahana untuk meningkatkan dan mengembangkan kualitas sumber daya
-manusia. Seiring dengan perkembangan teknologi komputer dan teknologi informasi,
-sekolah-sekolah di Indonesia sudah waktunya mengembangkan Sistem Informasi
-manajemennya agar mampu mengikuti perubahan jaman.
-`;
+const article: string = (articleData as { content: string }).content;
 
 const TextAnalyzer: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [replaceWord, setReplaceWord] = useState('');
-  const [newWord, setNewWord] = useState('');
-  const [modifiedText, setModifiedText] = useState(article);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [replaceWord, setReplaceWord] = useState<string>('');
+  const [newWord, setNewWord] = useState<string>('');
+  const [modifiedText, setModifiedText] = useState<string>(article);
 
   const countOccurrences = (word: string): number => {
     const regex = new RegExp(`\\b${word}\\b`, 'gi');
     return (article.match(regex) || []).length;
   };
 
-  const handleReplace = () => {
+  const handleReplace = (): void => {
     const regex = new RegExp(`\\b${replaceWord}\\b`, 'gi');
     const newText = modifiedText.replace(regex, newWord);
     setModifiedText(newText);
