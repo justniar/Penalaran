@@ -26,49 +26,69 @@ const TextAnalyzer: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Text Analyzer</h1>
-      <p><strong>Original Text:</strong></p>
-      <p>{article}</p>
+    <div className="p-6 max-w-4xl mx-auto bg-gray-100 text-gray-800">
+      <h1 className="text-3xl font-bold mb-6 text-center">Text Analyzer</h1>
 
-      <div>
-        <h2>Pencarian Kata</h2>
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Original Text</h2>
+        <p className="bg-white p-4 rounded-md shadow-md text-sm">{article}</p>
+      </div>
+
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">Pencarian Kata</h2>
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Masukkan kata untuk dicari"
+          className="border border-gray-300 rounded-md p-2 w-full mb-2"
         />
-        <p>
+        <p className="text-sm text-gray-700">
           Ditemukan: {searchTerm ? countOccurrences(searchTerm) : 0} kali
         </p>
       </div>
 
-      <div>
-        <h2>Penggantian Kata</h2>
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-2">Penggantian Kata</h2>
         <input
           type="text"
           value={replaceWord}
           onChange={(e) => setReplaceWord(e.target.value)}
           placeholder="Kata yang ingin diganti"
+          className="border border-gray-300 rounded-md p-2 w-full mb-2"
         />
         <input
           type="text"
           value={newWord}
           onChange={(e) => setNewWord(e.target.value)}
           placeholder="Kata pengganti"
+          className="border border-gray-300 rounded-md p-2 w-full mb-2"
         />
-        <button onClick={handleReplace}>Ganti Kata</button>
-        <p><strong>Modified Text:</strong></p>
-        <p>{modifiedText}</p>
+        <button
+          onClick={handleReplace}
+          className="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2"
+        >
+          Ganti Kata
+        </button>
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold">Modified Text:</h3>
+          <p className="bg-white p-4 rounded-md shadow-md text-sm">{modifiedText}</p>
+        </div>
       </div>
 
       <div>
-        <h2>Pengurutan Kata Berdasar Abjad</h2>
-        <button onClick={sortWords}>Urutkan Kata</button>
-        <ul>
+        <h2 className="text-xl font-semibold mb-2">Pengurutan Kata Berdasar Abjad</h2>
+        <button
+          onClick={sortWords}
+          className="bg-green-500 hover:bg-green-600 text-white rounded-md px-4 py-2 mb-4"
+        >
+          Urutkan Kata
+        </button>
+        <ul className="bg-white p-4 rounded-md shadow-md text-sm space-y-1">
           {sortWords().map((word, index) => (
-            <li key={index}>{word}</li>
+            <li key={index} className="text-gray-800">
+              {word}
+            </li>
           ))}
         </ul>
       </div>
