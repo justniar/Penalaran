@@ -27,6 +27,12 @@ const TextAnalyzer: React.FC = () => {
     return Array.from(new Set(words)).sort();
   };
 
+  const highlightText = (text: string, term: string): string => {
+    if (!term) return text;
+    const regex = new RegExp(`(${term})`, 'gi');
+    return text.replace(regex, '<span class="bg-blue-200">$1</span>');
+  };
+
   const sortedWords = sortWords();
   const totalPages = Math.ceil(sortedWords.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -42,9 +48,13 @@ const TextAnalyzer: React.FC = () => {
 
       <div className="mb-6 max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Original Text</h2>
-        <p className="bg-gray-100 p-4 rounded-md text-sm text-gray-700 shadow-inner">{article}</p>
+        <p
+          className="bg-gray-100 p-4 rounded-md text-sm text-gray-700 shadow-inner"
+          dangerouslySetInnerHTML={{
+            __html: highlightText(article, searchTerm),
+          }}
+        ></p>
       </div>
-
 
       <div className="mb-6 max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-xl font-semibold mb-2">Pencarian Kata</h2>
