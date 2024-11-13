@@ -10,7 +10,7 @@ const TextAnalyzer: React.FC = () => {
   const [modifiedText, setModifiedText] = useState<string>(article);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5; 
-  const [modifiedWords, setModifiedWords] = useState<Map<number, string>>(new Map());
+  const [_, setModifiedWords] = useState<Map<number, string>>(new Map());
 
 
   const countOccurrences = (word: string): number => {
@@ -20,7 +20,7 @@ const TextAnalyzer: React.FC = () => {
 
   const handleReplace = (): void => {
     const regex = new RegExp(`\\b${replaceWord}\\b`, 'gi');
-    const newText = modifiedText.replace(regex, (match, offset) => {
+    const newText = modifiedText.replace(regex, (_, offset) => {
       const newWordWithHighlight = `<span class="bg-blue-300">${newWord}</span>`;
       setModifiedWords(prev => prev.set(offset, newWordWithHighlight)); 
       return newWordWithHighlight;
